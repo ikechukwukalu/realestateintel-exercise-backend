@@ -14,6 +14,7 @@ Requirements:
 - For Linux - `cp .env.example .env`
 - For Windows - `copy .env.example .env`
 - `composer install`
+- `php artisan key:generate`
 - `npm install && npm run prod`
 - Create database `realestate_intel` in MySQL
 - `php artisan migrate --seed`
