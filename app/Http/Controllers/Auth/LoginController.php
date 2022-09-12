@@ -31,7 +31,7 @@ class LoginController extends Controller
     public function login(Request $request): JsonResponse
     {
         if ($this->hasTooManyLoginAttempts($request)) {
-            // $this->fireLockoutEvent($request);
+            $this->fireLockoutEvent($request);
 
             $data = ["message" => 'Too many login attempts. Please try again in a minutes time.'];
             return $this->httpJsonResponse('fail', 500, $data);
