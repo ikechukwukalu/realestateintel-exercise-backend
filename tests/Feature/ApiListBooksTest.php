@@ -22,7 +22,7 @@ class ApiListBooksTest extends TestCase
     {
         $credentials = [
             'email' => 'testuser1@gmail.com',
-            'password' => '12345678'
+            'password' => 'password'
         ];
 
         $user =  User::firstOrCreate(
@@ -46,21 +46,11 @@ class ApiListBooksTest extends TestCase
 
     public function testListSpecificBook()
     {
-        $credentials = [
-            'email' => 'testuser1@gmail.com',
-            'password' => '12345678'
-        ];
-
-        $user =  User::firstOrCreate(
-            ['email' => $credentials['email']],
-            [
-                'name' => Str::random(40),
-                'password' => Hash::make($credentials['password'])
-            ]
-        );
-
-        $accessToken = $user->createToken($credentials['email'])->plainTextToken;
+        $user =  User::first();
+        $accessToken = $user->createToken($user->email)->plainTextToken;
         $this->actingAs($user);
+
+        Book::factory(1)->create();
 
         $response = $this->json('GET', '/api/v1/books/' . Book::first()->id, [], ['Authorization' => 'Bearer ' . $accessToken]);
         $responseArray = json_decode($response->getContent(), true);

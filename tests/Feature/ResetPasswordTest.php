@@ -28,12 +28,14 @@ class ResetPasswordTest extends TestCase
     {
         $postData = [
             'email' => 'testuser2gmail.com', //Wrong email format
-            'password' => '12345678',
-            'password_confirmation' => '1234567' //None matching passwords
+            'password' => 'password',
+            'password_confirmation' => '1234567', //None matching passwords
         ];
 
-        $response = $this->post('/reset/password', $postData);
+        $response = $this->post('/api/auth/reset/password', $postData);
         $responseArray = json_decode($response->getContent(), true);
+
+        var_dump($response->getContent());
 
         $this->assertEquals(500, $responseArray['status_code']);
         $this->assertEquals('fail', $responseArray['status']);
@@ -44,22 +46,18 @@ class ResetPasswordTest extends TestCase
     public function testResetPassword()
     {
         $random = Str::random(40);
+
+        $user =  User::first();
         $postData = [
-            'email' => 'test-' . $random . '-user@gmail.com',
-            'password' => '12345678',
-            'password_confirmation' => '12345678'
+            'email' => $user->email,
+            'password' => 'password',
+            'password_confirmation' => 'password'
         ];
 
-        $user =  User::firstOrCreate(
-            ['email' => $postData['email']],
-            [
-                'name' => $random,
-                'password' => Hash::make($postData['password'])
-            ]
-        );
-
-        $response = $this->post('/reset/password', $postData);
+        $response = $this->post('/api/auth/reset/password', $postData);
         $responseArray = json_decode($response->getContent(), true);
+
+        var_dump($response->getContent());
 
         $this->assertEquals(200, $responseArray['status_code']);
         $this->assertEquals( 'success', $responseArray['status']);

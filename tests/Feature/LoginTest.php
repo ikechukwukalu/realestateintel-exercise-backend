@@ -36,7 +36,7 @@ class LoginTest extends TestCase
         $random = Str::random(40);
         $postData = [
             'email' => 'testuser1@gmail.com',
-            'password' => '12345678'
+            'password' => 'password'
         ];
 
         $user =  User::firstOrCreate(
@@ -60,7 +60,7 @@ class LoginTest extends TestCase
         $random = Str::random(40);
         $postData = [
             'email' => 'testuser1@gmail.com',
-            'password' => '12345678'
+            'password' => 'password'
         ];
 
         $user =  User::firstOrCreate(

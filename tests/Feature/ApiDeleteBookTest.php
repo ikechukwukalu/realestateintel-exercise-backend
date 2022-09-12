@@ -23,17 +23,10 @@ class ApiDeleteBookTest extends TestCase
     {
         $credentials = [
             'email' => 'testuser1@gmail.com',
-            'password' => '12345678'
+            'password' => 'password'
         ];
 
-        $user =  User::firstOrCreate(
-            ['email' => $credentials['email']],
-            [
-                'name' => Str::random(40),
-                'password' => Hash::make($credentials['password'])
-            ]
-        );
-
+        $user =  User::first();
         $accessToken = $user->createToken($credentials['email'])->plainTextToken;
         $this->actingAs($user);
 

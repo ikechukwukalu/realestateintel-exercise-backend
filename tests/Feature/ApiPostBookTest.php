@@ -22,7 +22,7 @@ class ApiPostBookTest extends TestCase
     {
         $credentials = [
             'email' => 'testuser1@gmail.com',
-            'password' => '12345678'
+            'password' => 'password'
         ];
 
         $user =  User::firstOrCreate(
@@ -58,7 +58,7 @@ class ApiPostBookTest extends TestCase
     {
         $credentials = [
             'email' => 'testuser1@gmail.com',
-            'password' => '12345678'
+            'password' => 'password'
         ];
 
         $user =  User::firstOrCreate(

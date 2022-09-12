@@ -19,7 +19,7 @@ class RegistrationTest extends TestCase
         $postData = [
             'name' => 'Test User 2',
             'email' => 'testuser2gmail.com', //Wrong email format
-            'password' => '12345678',
+            'password' => 'password',
             'password_confirmation' => '1234567' //None matching passwords
         ];
 
@@ -38,8 +38,8 @@ class RegistrationTest extends TestCase
         $postData = [
             'name' => 'Test User ' . $random,
             'email' => 'test-' . $random . '-user@gmail.com',
-            'password' => '12345678',
-            'password_confirmation' => '12345678'
+            'password' => 'password',
+            'password_confirmation' => 'password'
         ];
 
         $response = $this->post('/api/auth/register', $postData);
